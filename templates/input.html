@@ -1,17 +1,262 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<!Doctype html>
+<html>
     <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="static/login.css" type="text/css">
-
+        <title>Get Evaluation</title>
+        <style>
+            body
+            {
+                background-size:cover;
+            }
+            label[class = "Columns"]
+            {
+                margin-left: 50px;
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                font-size: 26px;
+                color: rgb(0, 0, 0);
+            }
+            label[class = "Options"]
+            {
+                margin-left: 0%;
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                font-size: 20px;
+                color: rgb(0, 0, 0);
+            }
+            form
+            {
+                position: relative;
+                left: 10%;
+                justify-content: center;
+                width: 80%;
+                height: 1000%;
+            }
+            input[type = "number"]
+            {
+                margin-left: 20%;
+                width: 50%;
+                height: 35px;
+                text-align: center;
+                font-size: 1.5em;
+                border-color: black;
+            }
+            input[type = "radio"]
+            {
+                margin-left: 20%;
+                width: 5%;
+                height: 20%;
+                margin-bottom: 1%;
+                text-align: center;
+                background-color: #6e6d6d1c;
+                border-color: black;
+            }
+            input[type = "range"]{
+                margin-left: 20%;
+                width: 80%;
+                height: 30%;
+                text-align: center;
+                background-color: #6e6d6d1c;
+                border-color: black;
+            }
+            button
+            {
+                margin-top: 20px;
+                margin-left: 25%;
+                width: 50%;
+                height: 10%;
+                font-size: 1.5em;
+                background-color: #3b3a3a1c;
+            }
+        </style>
     </head>
+    <body background = "static/bg5.jpg">
+        <div id = "container">
+        <form action = "/predict" method = "post">
+            <br/><br/>
 
-    <body>
-        <form action="/predict" method="POST" enctype="multipart/form-data">
-            <label for="File : ">Username : </label>
-            <input type="file" name="file" placeholder="">
-            <button type="submit">Upload</button>
+            <label class = "Columns">Fuel Type : </label></br>
+            <input type = "radio" id = "fueltype" name = "fueltype" value = "gas">
+            <label class = "Options">Gas</label><br>
+            <input type = "radio" id = "fueltype" name = "fueltype" value = "diesel">
+            <label class = "Options">Diesel</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Aspiration : </label></br>
+            <input type = "radio" id = "aspiration" name = "aspiration" value = "std">
+            <label class = "Options">Standard</label><br>
+            <input type = "radio" id = "aspiration" name = "aspiration" value = "turbo">
+            <label class = "Options">Turbo</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Number of Doors : </label></br>
+            <input type = "radio" id = "doors" name = "doors" value = "two">
+            <label class = "Options">Two</label><br>
+            <input type = "radio" id = "doors" name = "doors" value = "four">
+            <label class = "Options">Four</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Car Body : </label></br>
+            <input type = "radio" id = "body" name = "body" value = "convertible">
+            <label class = "Options">Convertible</label><br>
+            <input type = "radio" id = "body" name = "body" value = "hatchback">
+            <label class = "Options">Hatchback</label><br>
+            <input type = "radio" id = "body" name = "body" value = "sedan">
+            <label class = "Options" >Sedan</label><br>
+            <input type = "radio" id = "body" name = "body" value = "wagon">
+            <label class = "Options">Wagon</label><br>
+            <input type = "radio" id = "body" name = "body" value = "hardtop">
+            <label class = "Options">Hardtop</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Wheel Drive : </label></br>
+            <input type = "radio" id = "wheeldrive" name = "wheeldrive" value = "rwd">
+            <label class = "Options" >Rear Wheel Drive</label><br>
+            <input type = "radio" id = "wheeldrive" name = "wheeldrive" value = "fwd">
+            <label class = "Options">Forward Wheel Drive</label><br>
+            <input type = "radio" id = "wheeldrive" name = "wheeldrive" value = "4wd">
+            <label class = "Options">Four Wheel Drive</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Engine Location : </label></br>
+            <input type = "radio" id = "engineloc" name = "engineloc" value = "front">
+            <label class = "Options">Front</label><br>
+            <input type = "radio" id = "engineloc" name = "engineloc" value = "rear">
+            <label class = "Options">Rear</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Engine Type : </label></br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "dohc">
+            <label class = "Options">Dual OverHead Camshaft Engine</label><br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "dohcv">
+            <label class = "Options">Dual OverHead Camshaft V-Engine</label><br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "ohc">
+            <label class = "Options">OverHead Camshaft Engine</label><br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "ohcv">
+            <label class = "Options">OverHead Camshaft V-Engine</label><br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "ohcf">
+            <label class = "Options">OverHead Camshaft F-Engine</label><br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "l">
+            <label class = "Options">Inline Engine</label><br>
+            <input type = "radio" id = "enginetype" name = "enginetype" value = "rotor">
+            <label class = "Options">Rotor Engine</label><br>
+        
+            <br><br>
+
+            <label class = "Columns">Number of Cylinders : </label></br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "two">
+            <label class = "Options">Two</label><br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "three">
+            <label class = "Options">Three</label><br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "four">
+            <label class = "Options">Four</label><br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "five">
+            <label class = "Options">Five</label><br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "six">
+            <label class = "Options">Six</label><br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "eight">
+            <label class = "Options">Eight</label><br>
+            <input type = "radio" id = "cylindercount" name = "cylindercount" value = "twelve">
+            <label class = "Options">Twelve</label><br>
+
+            <br><br>
+
+            <label class = "Columns">Fuel System : </label></br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "mpfi">
+            <label class = "Options">Multi-Point Fuel Injection</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "spfi">
+            <label class = "Options">Sequential-Port Fuel Injection</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "mfi">
+            <label class = "Options">Multi-Port Fuel Injection</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "1bbl">
+            <label class = "Options">1 Barrel Carburetor</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "2bbl">
+            <label class = "Options">2 Barrel Carburetor</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "4bbl">
+            <label class = "Options">4 Barrel Carburetor</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "idi">
+            <label class = "Options">Indirect Injection</label><br>
+            <input type = "radio" id = "fuelsys" name = "fuelsys" value = "spdi">
+            <label class = "Options">SPDI</label><br>
+        
+            <br><br>
+
+            <label class = "Columns">Symboling : </label><br><br>
+            <input type="range" id="symboling" name="symboling" min="-3" max="3" value="0" step="1"><br>
+
+            <br><br>
+
+            <label class = "Columns">Wheelbase : </label><br><br>
+            <input type="number" step="any" id="wheelbase" name="wheelbase"><br>
+
+            <br><br>
+
+            <label class = "Columns">Car Length (mm): </label><br><br>
+            <input type="number" step="any" id="carlength" name="carlength"><br>
+
+            <br><br>
+
+            <label class = "Columns">Car Width (mm): </label><br><br>
+            <input type="number" step="any" id="carwidth" name="carwidth"><br>
+
+            <br><br>
+
+            <label class = "Columns">Car Height (mm): </label><br><br>
+            <input type="number" step="any" id="carheight" name="carheight"><br>
+
+            <br><br>
+
+            <label class = "Columns">Curb Weight (kg): </label><br><br>
+            <input type="number" step="any" id="curweight" name="curbweight"><br>
+
+            <br><br>
+
+            <label class = "Columns">Engine Size (l): </label><br><br>
+            <input type="number" step="any" id="enginesize" name="enginesize"><br>
+
+            <br><br>
+
+            <label class = "Columns">Bore Ratio : </label><br><br>
+            <input type="number" step="any" id="boreratio" name="boreratio"><br>
+
+            <br><br>
+
+            <label class = "Columns">Stroke : </label><br><br>
+            <input type="number" step="any" id="stroke" name="stroke"><br>
+
+            <br><br>
+
+            <label class = "Columns">Compression Ratio : </label><br><br>
+            <input type="number" step="any" id="compratio" name="compratio"><br>
+
+            <br><br>
+
+            <label class = "Columns">Horsepower : </label><br><br>
+            <input type="number" step="any" id="horsepower" name="horsepower"><br>
+
+            <br><br>
+
+            <label class = "Columns">Peak RPM : </label><br><br>
+            <input type="number" step="any" id="peakrpm" name="peakrpm"><br>
+
+            <br><br>
+
+            <label class = "Columns">City Mileage (kmpl): </label><br><br>
+            <input type="number" step="any" id="citympg" name="citympg"><br>
+
+            <br><br>
+
+            <label class = "Columns">Highway Mileage (kmpl): </label><br><br>
+            <input type="number" step="any" id="highmpg" name="highmpg"><br>
+
+            <br><br>
+
+            <button type="submit">EVALUATE</button>
+            <br/><br/>
         </form>
+        </div>
     </body>
 </html>
