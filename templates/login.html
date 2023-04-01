@@ -1,21 +1,57 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<!Doctype html>
+<html lang = "en">
     <head>
         <title>Login</title>
-        <link rel="stylesheet" href="static/login.css" type="text/css">
-
+        <style>
+            #container
+            {
+                position: relative;
+                justify-content: center;
+                margin: 5px;
+                padding: 5px;
+            }
+            form
+            {
+                position: relative;
+                justify-content: center;
+                margin-left: 25%;
+                margin-top: 250px;
+                width: 50%;
+                border: 1px solid black;
+                background-color: #6e6d6d1c;
+            }
+            input
+            {
+                position: relative;
+                margin-left: 10%;
+                width: 80%;
+                height : 50px;
+                justify-self: center;
+                text-align: center;
+                background-color: rgb(255, 255, 255);
+                border-color: black;
+            }
+            button
+            {
+                position: relative;
+                margin-left: 26%;
+                margin-bottom: 20px;
+                justify-self: center;
+                width: 50%;
+                height: 35px;
+                background-color: #3b3a3a1c;
+            }
+        </style>
     </head>
-
-    <body>
-        <form action="/login" method="post">
-            <label for="username">Username : </label>
-            <input type="text" name="username" placeholder="">
-            <br><br>
-            <label for="password">Password :   </label>
-            <input type="password" name="pwd" placeholder="">
-            <br><br>
-            <button type="submit">Login</button>
+    <body background = "static/bg5.jpg">
+        <div id = "container">
+        <form action = "/login" method = "post">
+            <br/><br/>
+            <input type = "text" id = "username" name = "username" placeholder="Username"><br><br>
+            <input type = "password" id = "password" name = "password" placeholder="Password"><br><br>
+            <button type="submit">Log in</button>
+            <br/><br/>
         </form>
+        </div>
     </body>
 </html>
