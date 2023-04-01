@@ -4,22 +4,51 @@ import os
 from keras.models import load_model
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
-inputDirectory = r"D:\College Files\SEM4\ML\CIA2\input"
 
-model = load_model("model.h5")
-
-def infer(filename, model):
-    pixels = []
-    img = cv2.imread(os.path.join(inputDirectory, filename))
-    img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-    pixels.append(np.array(img))
+def prerequisite():
+    global columns, model
+    with open("columns.txt", "r") as f:
+        columns = eval(f.read())
     
-    pixels = np.array(pixels)
+    columns.remove("price")
+        
+    import pickle
     
-    return model.predict(pixels)
+    with open("model.pkl", "rb") as f:
+        model = pickle.load(f)
+    
+    
+def convert(data, columns):
+    Input = [0 for i in range(len(columns))]
+    for key in data:
+        if type(data[key]) == str:
+            colName = key + "_" + data[key]
+            try:
+                Input[columns.index(colName)] = 1
+            except:
+                pass
+        else:
+            colName = key
+            Input[columns.index(colName)] = data[key]
+    return Input
 
+def toInches(x):
+    return 0.0393701 * float(x)
+
+def toPounds(x):
+    return 2.20462 * float(x)
+
+def toCubicInches(x):
+    return 61.0237 * float(x)
+
+def toMPG(x):
+    return 2.352145 * float(x)
+
+
+prerequisite()
 
 
 @app.route('/')
@@ -30,7 +59,7 @@ def main():
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get("username")
-    password = request.form.get("pwd")
+    password = request.form.get("password")
 
     mydb = mysql.connector.connect(host = "localhost", 
                                user = "root", 
@@ -38,6 +67,7 @@ def login():
                                database = "userprofiles");
     mycursor = mydb.cursor()
     mycursor.execute("select * from login")
+    print(username, password)
 
     if (username, password) in mycursor.fetchall():
     
@@ -47,10 +77,33 @@ def login():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    f = request.files['file']
-    f.save(os.path.join(inputDirectory, f.filename))
-    print(infer(f.filename, model))
-    return render_template("login.html")
+    data = {"fueltype" : request.form["fueltype"],
+        "aspiration" : request.form["aspiration"],
+        "doornumber" : request.form["doors"],
+        "carbody" : request.form["body"],
+        "drivewheel" : request.form["wheeldrive"],
+        "enginelocation" : request.form["engineloc"],
+        "enginetype" : request.form["enginetype"],
+        "cylindernumber" : request.form["cylindercount"],
+        "fuelsystem" : request.form["fuelsys"],
+        "symboling" : request.form["symboling"],
+        "wheelbase" : toInches(request.form["wheelbase"]),
+        "carlength" : toInches(request.form["carlength"]),
+        "carwidth" : toInches(request.form["carwidth"]),
+        "carheight" : toInches(request.form["carheight"]),
+        "curbweight" : toPounds(request.form["curbweight"]),
+        "enginesize" : toCubicInches(request.form["enginesize"]),
+        "boreratio" : request.form["boreratio"],
+        "stroke" : request.form["stroke"],
+        "compressionratio" : request.form["compratio"],
+        "horsepower" : request.form["horsepower"],
+        "peakrpm" : request.form["peakrpm"],
+        "citympg" : toMPG(request.form["citympg"]),
+        "highwaympg" : toMPG(request.form["highmpg"])
+    }
+    i = convert(data, columns)
+    pred = model.predict([i])[0][0]
+    return render_template("output.html", data=round(pred))
 
 
 if __name__ == '__main__':
